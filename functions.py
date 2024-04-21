@@ -52,6 +52,4 @@ def getFormat(filename):
     """
     return os.path.splitext(filename)[1][1:]
 
-
-
-print(read("./books/books.xml"))
+# print(read("./books/books.yaml"))
