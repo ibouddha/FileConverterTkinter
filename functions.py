@@ -5,14 +5,18 @@ import pandas as pd
 import xml.etree.ElementTree as ET
 
 def jsontocsv(jsonfile):
+    # Read JSON file
     data = pd.read_json(jsonfile)
-    data.to_csv("./outputs/outputfromjson.csv",index=False)
+    # Convert JSON to CSV
+    data.to_csv("./outputs/outputfromjson.csv", index=False)
     
 def csvtojson(csvfile):
     data = pd.read_csv(csvfile)
     records = json.loads(data.to_json(orient="records"))
     with open("./outputs/outputfromcsv.json","w") as f:
         data = json.dump(records,f)
+        
+
         
 def read(filename):
     ext = getFormat(filename)
@@ -44,6 +48,7 @@ def read(filename):
         case _:
             print("Invalid file format")
             
+        
     return data
 
 def getFormat(filename):
@@ -52,4 +57,3 @@ def getFormat(filename):
     """
     return os.path.splitext(filename)[1][1:]
 
-# print(read("./books/books.yaml"))
