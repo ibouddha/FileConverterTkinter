@@ -1,5 +1,6 @@
 import tkinter as tk
 import customtkinter as ctk
+from CTkTable import *
 import functions as func  # importons les fonctions BackEnd
 
 
@@ -31,7 +32,7 @@ def display_content(text_widget, filename):
 
 def main():
     root_tk = tk.Tk()
-    root_tk.geometry("900x500")
+    root_tk.geometry("900x1500")
     root_tk.title("Bouddha")
 
     # File uploader button
@@ -42,19 +43,35 @@ def main():
         fg_color="navy",
         command=lambda: upload_file(root_tk)  # Pass root_tk for disabling after upload
     )
-    upload_button.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+    upload_button.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
     # Displayer (text widget)
     text_display = tk.Text(root_tk, font=("Arial", 12), wrap=tk.WORD, width=80)  # Adjust width as needed
-    text_display.place(relx=0.5, rely=0.6, relwidth=0.8, relheight=0.3, anchor=tk.CENTER)
+    text_display.place(relx=0.5, rely=0.35, relwidth=0.8, relheight=0.4, anchor=tk.CENTER)
     
-    convert_button = ctk.CTkButton(
+    json_button = ctk.CTkButton(
         master=root_tk,
         corner_radius=10,
-        text="to Json",
+        text="Json",
         fg_color="navy",
         command=lambda: func.csvtojson()  # Pass root_tk for disabling after upload
     )
+    csv_button = ctk.CTkButton(
+        master=root_tk,
+        corner_radius=10,
+        text="Json",
+        fg_color="navy",
+        command=lambda: func.csvtojson()  # Pass root_tk for disabling after upload
+    )
+    xml_button = ctk.CTkButton(
+        master=root_tk,
+        corner_radius=10,
+        text="Json",
+        fg_color="navy",
+        command=lambda: func.csvtojson()  # Pass root_tk for disabling after upload
+    )
+    
+    json_button.place(relwidth=0.1,relx=0.4,rely=0.6, anchor=tk.CENTER)
 
     def upload_file(window):
         """Handles file upload, disables button, and displays content."""

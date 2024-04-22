@@ -9,12 +9,14 @@ def jsontocsv(jsonfile):
     data = pd.read_json(jsonfile)
     # Convert JSON to CSV
     data.to_csv("./outputs/outputfromjson.csv", index=False)
+    return data
     
 def csvtojson(csvfile):
     data = pd.read_csv(csvfile)
     records = json.loads(data.to_json(orient="records"))
     with open("./outputs/outputfromcsv.json","w") as f:
         data = json.dump(records,f)
+    return data
         
 
         
