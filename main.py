@@ -33,7 +33,7 @@ def display_content(text_widget, filename):
 # Main function
 def main():
     root_tk = tk.Tk()
-    root_tk.geometry("900x1500")
+    root_tk.geometry("400x500")
     root_tk.title("Bouddha")
 
     # File uploader button
@@ -76,6 +76,9 @@ def main():
             "jsontoyaml": print(func.jsontoyaml(get_selected_file())),
             "xmltocsv": print(func.xmltocsv(get_selected_file())),
             "xmltojson": print(func.xmltojson(get_selected_file())),
+            "xmltoyaml": print(func.xmltoyaml(get_selected_file())),
+            "yaml": print(func.xmltoyaml(get_selected_file())),
+            "xmltoyaml": print(func.xmltoyaml(get_selected_file())),
             "xmltoyaml": print(func.xmltoyaml(get_selected_file())),
             # ... Add more options and functions here
         }
