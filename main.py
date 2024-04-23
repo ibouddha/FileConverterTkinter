@@ -68,15 +68,15 @@ def main():
     def on_option_change(var, index, mode):
         option_functions = {
             "default": "",
-            "csvtojson": func.csvtojson(get_selected_file()),
-            "csvtoxml": func.csvtoxml(get_selected_file()),
-            "csvtoyaml": func.csvtoyaml(get_selected_file()),
-            "jsontoxml": func.jsontoxml(get_selected_file()),
-            "jsontocsv": func.jsontocsv(get_selected_file()),
-            "jsontoyaml": func.jsontoyaml(get_selected_file()),
-            "xmltocsv": func.xmltocsv(get_selected_file()),
-            "xmltojson": func.xmltojson(get_selected_file()),
-            "xmltoyaml": func.xmltoyaml(get_selected_file()),
+            "csvtojson": print(func.csvtojson(get_selected_file())),
+            "csvtoxml": print(func.csvtoxml(get_selected_file())),
+            "csvtoyaml": print(func.csvtoyaml(get_selected_file())),
+            "jsontoxml": print(func.jsontoxml(get_selected_file())),
+            "jsontocsv": print(func.jsontocsv(get_selected_file())),
+            "jsontoyaml": print(func.jsontoyaml(get_selected_file())),
+            "xmltocsv": print(func.xmltocsv(get_selected_file())),
+            "xmltojson": print(func.xmltojson(get_selected_file())),
+            "xmltoyaml": print(func.xmltoyaml(get_selected_file())),
             # ... Add more options and functions here
         }
         
@@ -85,6 +85,7 @@ def main():
         selected_option_value = selected_option.get()
         if selected_option_value in option_functions:
             option_functions[selected_option_value]()  # Call the function for the selected option
+            print(selected_option_value)
     
     def upload_file(window):
         """Handles file upload, disables button, and displays content."""
@@ -92,7 +93,6 @@ def main():
         if selected_file:
             # Process the selected file (call func.getFormat, etc.)
             display_content(text_display, selected_file)
-            upload_button.configure(state=tk.DISABLED)  # Disable button after upload
             
 
     root_tk.mainloop()
