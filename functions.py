@@ -9,6 +9,7 @@ def jsontocsv(jsonfile):
     data = pd.read_json(jsonfile)
     # Convert JSON to CSV
     data.to_csv("./outputs/outputfromjson.csv", index=False)
+    print("jsontocsv")
     return data
     
 def csvtojson(csvfile):
@@ -18,7 +19,33 @@ def csvtojson(csvfile):
         data = json.dump(records,f)
     return data
         
+def csvtoxml(csvfile):
+    data = pd.read_csv(csvfile)
+    return data
 
+def csvtoyaml(csvfile):
+    data = pd.read_csv(csvfile)
+    return data
+
+def jsontoxml(jsonfile):
+    data = pd.read_json(jsonfile)
+    return data
+
+def xmltojson(xmlfile):
+    data = []
+    return data
+
+def jsontoyaml(jsonfile):
+    data = pd.read_json(jsonfile)
+    return data
+
+def xmltoyaml(xmlfile):
+    data = []
+    return data
+
+def xmltocsv(xmlfile):
+    data = []
+    return data
         
 def read(filename):
     ext = getFormat(filename)

@@ -30,6 +30,7 @@ def display_content(text_widget, filename):
         text_widget.insert("1.0", "Error processing file.")
 
 
+# Main function
 def main():
     root_tk = tk.Tk()
     root_tk.geometry("900x1500")
@@ -49,30 +50,42 @@ def main():
     text_display = tk.Text(root_tk, font=("Arial", 12), wrap=tk.WORD, width=80)  # Adjust width as needed
     text_display.place(relx=0.5, rely=0.35, relwidth=0.8, relheight=0.4, anchor=tk.CENTER)
     
-    json_button = ctk.CTkButton(
-        master=root_tk,
-        corner_radius=10,
-        text="Json",
-        fg_color="navy",
-        command=lambda: func.csvtojson()  # Pass root_tk for disabling after upload
-    )
-    csv_button = ctk.CTkButton(
-        master=root_tk,
-        corner_radius=10,
-        text="Json",
-        fg_color="navy",
-        command=lambda: func.csvtojson()  # Pass root_tk for disabling after upload
-    )
-    xml_button = ctk.CTkButton(
-        master=root_tk,
-        corner_radius=10,
-        text="Json",
-        fg_color="navy",
-        command=lambda: func.csvtojson()  # Pass root_tk for disabling after upload
-    )
+    options = ["default","csvtojson","csvtoxml","csvtoyaml","jsontocsv","jsontoxml","jsontoyaml","xmltojson","xmltocsv","xmltoyaml"]
     
-    json_button.place(relwidth=0.1,relx=0.4,rely=0.6, anchor=tk.CENTER)
+    selected_option = tk.StringVar()
+    selected_option.set(options[0])
+    
+    option_menu = tk.OptionMenu(
+        root_tk,  # Pass parent window as keyword argument
+        selected_option,
+        *options
+    )
+    option_menu.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
+    
+    # ... (Rest of your code)
 
+    
+    def on_option_change(var, index, mode):
+        option_functions = {
+            "default": "",
+            "csvtojson": func.csvtojson(get_selected_file()),
+            "csvtoxml": func.csvtoxml(get_selected_file()),
+            "csvtoyaml": func.csvtoyaml(get_selected_file()),
+            "jsontoxml": func.jsontoxml(get_selected_file()),
+            "jsontocsv": func.jsontocsv(get_selected_file()),
+            "jsontoyaml": func.jsontoyaml(get_selected_file()),
+            "xmltocsv": func.xmltocsv(get_selected_file()),
+            "xmltojson": func.xmltojson(get_selected_file()),
+            "xmltoyaml": func.xmltoyaml(get_selected_file()),
+            # ... Add more options and functions here
+        }
+        
+        selected_option.trace_add("write", on_option_change)
+        
+        selected_option_value = selected_option.get()
+        if selected_option_value in option_functions:
+            option_functions[selected_option_value]()  # Call the function for the selected option
+    
     def upload_file(window):
         """Handles file upload, disables button, and displays content."""
         selected_file = get_selected_file()
