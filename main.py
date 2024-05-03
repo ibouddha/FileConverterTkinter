@@ -42,30 +42,30 @@ def main():
         corner_radius=10,
         text="Upload",
         fg_color="navy",
-        command=lambda: upload_file(root_tk)  # Pass root_tk for disabling after upload
+        command=lambda: upload_file()  # Pass root_tk for disabling after upload
     )
     upload_button.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
     # Displayer (text widget)
     text_display = tk.Text(root_tk, font=("Arial", 12), wrap=tk.WORD, width=80)  # Adjust width as needed
     text_display.place(relx=0.5, rely=0.35, relwidth=0.8, relheight=0.4, anchor=tk.CENTER)
-    
-    options = ["default","csvtojson","csvtoxml","csvtoyaml","jsontocsv","jsontoxml","jsontoyaml","xmltojson","xmltocsv","xmltoyaml"]
-    
+
+    options = ["default", "csvtojson", "csvtoxml", "csvtoyaml", "jsontocsv", "jsontoxml", "jsontoyaml", "xmltojson",
+               "xmltocsv", "xmltoyaml"]
+
     selected_option = tk.StringVar()
     selected_option.set(options[0])
-    
+
     option_menu = tk.OptionMenu(
         root_tk,  # Pass parent window as keyword argument
         selected_option,
         *options
     )
     option_menu.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
-    
+
     # ... (Rest of your code)
 
-    
-    def on_option_change(var, index, mode):
+    def on_option_change():
         option_functions = {
             "default": "",
             "csvtojson": print(func.csvtojson(get_selected_file())),
@@ -77,26 +77,25 @@ def main():
             "xmltocsv": print(func.xmltocsv(get_selected_file())),
             "xmltojson": print(func.xmltojson(get_selected_file())),
             "xmltoyaml": print(func.xmltoyaml(get_selected_file())),
-            "yaml": print(func.xmltoyaml(get_selected_file())),
-            "xmltoyaml": print(func.xmltoyaml(get_selected_file())),
-            "xmltoyaml": print(func.xmltoyaml(get_selected_file())),
+            "yamltocsv": print(func.xmltoyaml(get_selected_file())),
+            "yamltojson": print(func.xmltoyaml(get_selected_file())),
+            "yamltoxml": print(func.xmltoyaml(get_selected_file())),
             # ... Add more options and functions here
         }
-        
+
         selected_option.trace_add("write", on_option_change)
-        
+
         selected_option_value = selected_option.get()
         if selected_option_value in option_functions:
             option_functions[selected_option_value]()  # Call the function for the selected option
             print(selected_option_value)
-    
-    def upload_file(window):
+
+    def upload_file():
         """Handles file upload, disables button, and displays content."""
         selected_file = get_selected_file()
         if selected_file:
             # Process the selected file (call func.getFormat, etc.)
             display_content(text_display, selected_file)
-            
 
     root_tk.mainloop()
 
